@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放页面</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .video-wrap { 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 100%;
+        }
+        
+        .video-wrap:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        
+        iframe { 
+            width: 850px; 
+            height: 480px; 
+            border: none; 
+            display: block;
+        }
+        
+        .video-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 850px;
+        }
+        
+        .video-info h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .video-info p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: #ff4e50;
+            border-color: #ff4e50;
+        }
+        
+        .btn-primary:hover {
+            background: #ff2e31;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            width: 100%;
+        }
+        
+        @media (max-width: 900px) {
+            iframe { 
+                width: 90vw; 
+                height: calc(90vw * 9 / 16); 
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .video-info {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>精彩视频展示</h1>
+            <p>欢迎观看我们的精选视频内容，这里汇集了各种精彩瞬间与创意作品</p>
+        </div>
+        
+        <div class="video-section">
+            <div class="video-wrap">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+            </div>
+            
+            <div class="video-info">
+                <h2>视频简介</h2>
+                <p>这是一个精彩的视频内容展示，包含了丰富的视觉元素和创意表达。视频内容精心制作，旨在为您带来愉悦的观看体验。</p>
+                <p>您可以通过下方的控制按钮进行相关操作，或者分享给您的朋友一起观看。</p>
+                
+                <div class="controls">
+                    <button class="btn btn-primary">点赞视频</button>
+                    <button class="btn">收藏内容</button>
+                    <button class="btn">分享给朋友</button>
+                    <button class="btn">全屏观看</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 视频展示页面 | 设计制作</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 全屏按钮功能
+            const fullscreenBtn = document.querySelector('.btn:nth-child(4)');
+            const videoWrap = document.querySelector('.video-wrap');
+            
+            fullscreenBtn.addEventListener('click', function() {
+                if (videoWrap.requestFullscreen) {
+                    videoWrap.requestFullscreen();
+                } else if (videoWrap.mozRequestFullScreen) { /* Firefox */
+                    videoWrap.mozRequestFullScreen();
+                } else if (videoWrap.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    videoWrap.webkitRequestFullscreen();
+                } else if (videoWrap.msRequestFullscreen) { /* IE/Edge */
+                    videoWrap.msRequestFullscreen();
+                }
+            });
+            
+            // 点赞按钮功能
+            const likeBtn = document.querySelector('.btn-primary');
+            likeBtn.addEventListener('click', function() {
+                this.textContent = '已点赞 ✓';
+                this.style.background = '#4CAF50';
+                this.style.borderColor = '#4CAF50';
+                this.disabled = true;
+                
+                // 添加点赞动画效果
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+            
+            // 添加页面加载动画
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
