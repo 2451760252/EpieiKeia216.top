@@ -90,8 +90,7 @@
         @media (max-width: 768px) {
             body {
                 align-items: flex-start;
-                /* 调整顶部间距，使视频不会超出可视范围 */
-                padding-top: 5vh;
+                padding-top: 10px; /* 减少顶部内边距 */
             }
             
             .background {
@@ -100,14 +99,23 @@
             
             .video-container {
                 max-width: 95%;
-                /* 恢复原有高度设置 */
-                margin-top: 0;
+                margin-top: 5px; /* 减少顶部外边距 */
+                max-height: 60vh; /* 限制视频容器最大高度 */
             }
             
-            .video-wrapper {
-                /* 恢复原有比例设置 */
-                padding-bottom: 56.25%;
-                height: 0;
+            .footer {
+                bottom: 10px; /* 调整页脚位置 */
+            }
+        }
+        
+        /* 特别小的手机屏幕 */
+        @media (max-width: 480px) {
+            body {
+                padding-top: 5px; /* 进一步减少顶部内边距 */
+            }
+            
+            .video-container {
+                max-height: 55vh; /* 进一步限制视频容器高度 */
             }
         }
     </style>
@@ -117,8 +125,7 @@
     
     <div class="video-container">
         <div class="video-wrapper">
-            <!-- 确保弹幕关闭 -->
-            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=0" 
+            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=false" 
                     scrolling="no" 
                     border="0" 
                     frameborder="no" 
@@ -166,6 +173,22 @@
                 clearTimeout(timeoutId);
                 background.style.backgroundImage = `url('${fallbackUrl}')`;
             };
+            
+            // 手机端额外调整：确保视频完全可见
+            if (isMobile) {
+                const videoContainer = document.querySelector('.video-container');
+                const viewportHeight = window.innerHeight;
+                
+                // 计算视频容器的最大高度，确保不会超出可视区域
+                const maxVideoHeight = viewportHeight * 0.6; // 视频占屏幕高度的60%
+                videoContainer.style.maxHeight = `${maxVideoHeight}px`;
+                
+                // 监听窗口大小变化
+                window.addEventListener('resize', function() {
+                    const newViewportHeight = window.innerHeight;
+                    videoContainer.style.maxHeight = `${newViewportHeight * 0.6}px`;
+                });
+            }
         });
     </script>
 </body>
