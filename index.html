@@ -15,8 +15,8 @@
             font-family: 'Microsoft YaHei', sans-serif;
             color: white;
             position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden; /* 禁止页面滚动 */
         }
         
         .background {
@@ -37,11 +37,20 @@
             background-image: url('https://raw.githubusercontent.com/2451760252/EpieiKeia216.top/main/1.jpg');
         }
         
+        .content-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
         .video-container {
             position: relative;
             width: 90%;
             max-width: 800px;
-            margin: 0 auto;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -64,7 +73,7 @@
         }
         
         .footer {
-            position: fixed;
+            position: absolute;
             bottom: 20px;
             width: 100%;
             text-align: center;
@@ -86,11 +95,8 @@
         
         /* 电脑端样式 */
         @media (min-width: 769px) {
-            body {
-                display: flex;
+            .content-wrapper {
                 justify-content: center;
-                align-items: center;
-                height: 100vh;
             }
             
             .video-container {
@@ -104,15 +110,14 @@
                 background-image: url('https://raw.githubusercontent.com/2451760252/EpieiKeia216.top/main/2.jpg');
             }
             
+            .content-wrapper {
+                padding-top: 10vh; /* 视频顶部距离手机顶部10% */
+            }
+            
             .video-container {
                 width: 95%;
                 max-width: 95%;
-                margin-top: 10vh; /* 视频顶部距离手机顶部10% */
                 max-height: 45vh; /* 限制视频容器最大高度 */
-                left: 0;
-                right: 0;
-                margin-left: auto;
-                margin-right: auto;
             }
             
             .footer {
@@ -130,9 +135,12 @@
         
         /* 横屏手机 */
         @media (max-width: 768px) and (orientation: landscape) {
+            .content-wrapper {
+                padding-top: 5vh; /* 横屏时减少顶部间距 */
+            }
+            
             .video-container {
                 max-height: 65vh; /* 横屏时允许更高一些 */
-                margin-top: 5vh; /* 横屏时减少顶部间距 */
             }
         }
     </style>
@@ -140,21 +148,23 @@
 <body>
     <div class="background" id="background"></div>
     
-    <div class="video-container" id="videoContainer">
-        <div class="video-wrapper">
-            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=false" 
-                    scrolling="no" 
-                    border="0" 
-                    frameborder="no" 
-                    framespacing="0" 
-                    allowfullscreen="true"
-                    sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
-            </iframe>
+    <div class="content-wrapper">
+        <div class="video-container" id="videoContainer">
+            <div class="video-wrapper">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=false" 
+                        scrolling="no" 
+                        border="0" 
+                        frameborder="no" 
+                        framespacing="0" 
+                        allowfullscreen="true"
+                        sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+                </iframe>
+            </div>
         </div>
-    </div>
-    
-    <div class="footer">
-        <a href="https://github.com/2451760252/EpieiKeia216.top" target="_blank">源码及背景原图</a>
+        
+        <div class="footer">
+            <a href="https://github.com/2451760252/EpieiKeia216.top" target="_blank">源码及背景原图</a>
+        </div>
     </div>
 
     <script>
@@ -200,12 +210,10 @@
                     
                     // 竖屏模式：视频顶部距离屏幕顶部10%
                     if (!isLandscape) {
-                        videoContainer.style.marginTop = `${viewportHeight * 0.1}px`;
                         videoContainer.style.maxHeight = `${viewportHeight * 0.45}px`;
                     } 
                     // 横屏模式：视频顶部距离屏幕顶部5%
                     else {
-                        videoContainer.style.marginTop = `${viewportHeight * 0.05}px`;
                         videoContainer.style.maxHeight = `${viewportHeight * 0.65}px`;
                     }
                 }
@@ -215,8 +223,4 @@
             adjustVideoPosition();
             
             // 监听窗口大小变化
-            window.addEventListener('resize', adjustVideoPosition);
-        });
-    </script>
-</body>
-</html>
+            window.addEventListener('resize', adjustVid
