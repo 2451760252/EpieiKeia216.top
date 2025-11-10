@@ -15,9 +15,9 @@
             font-family: 'Microsoft YaHei', sans-serif;
             color: white;
             position: relative;
-            min-height: 100vh; /* 恢复为100vh */
+            min-height: 100vh;
             overflow-x: hidden;
-            overflow-y: auto; /* 允许页面滚动 */
+            overflow-y: auto;
         }
         
         .background {
@@ -47,7 +47,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding-bottom: 10vh; /* 为页脚预留空间 */
+            padding-bottom: 10vh;
         }
         
         .video-container {
@@ -58,7 +58,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
-            margin-top: 5vh; /* 视频容器顶部间距 */
+            margin-top: 5vh;
         }
         
         .video-container:hover {
@@ -91,20 +91,17 @@
             color: rgba(255, 255, 255, 0.7);
             z-index: 10;
             padding: 10px 0;
-            /* 移除背景效果 */
         }
         
         .footer a {
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             transition: color 0.3s;
-            /* 移除背景和边框 */
         }
         
         .footer a:hover {
             color: white;
             text-decoration: underline;
-            /* 移除背景效果 */
         }
         
         /* 电脑端样式 */
@@ -236,43 +233,4 @@
             }, 3000);
             
             // 如果图片加载完成，清除超时
-            img.onload = function() {
-                clearTimeout(timeoutId);
-                loader.style.display = 'none';
-            };
-            
-            // 如果图片加载失败，立即使用备用图片
-            img.onerror = function() {
-                clearTimeout(timeoutId);
-                background.style.backgroundImage = `url('${fallbackUrl}')`;
-                loader.style.display = 'none';
-            };
-            
-            // 手机端视频位置调整
-            function adjustVideoPosition() {
-                if (isMobile) {
-                    const viewportHeight = window.innerHeight;
-                    const isLandscape = window.innerWidth > window.innerHeight;
-                    
-                    // 竖屏模式：视频顶部距离屏幕顶部10%
-                    if (!isLandscape) {
-                        videoContainer.style.maxHeight = `${viewportHeight * 0.45}px`;
-                    } 
-                    // 横屏模式：视频顶部距离屏幕顶部5%
-                    else {
-                        videoContainer.style.maxHeight = `${viewportHeight * 0.65}px`;
-                    }
-                }
-            }
-            
-            // 初始调整
-            adjustVideoPosition();
-            
-            // 监听窗口大小变化
-            window.addEventListener('resize', function() {
-                adjustVideoPosition();
-            });
-        });
-    </script>
-</body>
-</html>
+        
