@@ -14,12 +14,9 @@
         body {
             font-family: 'Microsoft YaHei', sans-serif;
             color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             position: relative;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .background {
@@ -44,6 +41,7 @@
             position: relative;
             width: 90%;
             max-width: 800px;
+            margin: 0 auto;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -86,30 +84,35 @@
             text-decoration: underline;
         }
         
-        /* 手机端样式 */
-        @media (max-width: 768px) {
+        /* 电脑端样式 */
+        @media (min-width: 769px) {
             body {
-                align-items: flex-start;
-                padding-top: 0; /* 完全移除顶部内边距 */
-                overflow-y: auto; /* 允许垂直滚动 */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
             }
             
+            .video-container {
+                margin-top: 0;
+            }
+        }
+        
+        /* 手机端样式 */
+        @media (max-width: 768px) {
             .background {
                 background-image: url('https://raw.githubusercontent.com/2451760252/EpieiKeia216.top/main/2.jpg');
             }
             
             .video-container {
-                max-width: 95%;
-                margin-top: 5vh; /* 使用视口高度单位 */
-                max-height: 45vh; /* 进一步降低高度 */
-                transform: translateY(0); /* 确保没有额外偏移 */
+                width: 95%;
+                margin-top: 10vh; /* 视频顶部距离手机顶部10% */
+                max-height: 45vh; /* 限制视频容器最大高度 */
             }
             
             .footer {
                 bottom: 10px;
                 font-size: 12px;
-                position: relative; /* 改为相对定位 */
-                margin-top: 10px;
             }
         }
         
@@ -117,7 +120,6 @@
         @media (max-width: 480px) and (max-height: 700px) {
             .video-container {
                 max-height: 40vh; /* 对小屏幕进一步限制高度 */
-                margin-top: 3vh; /* 更小的顶部间距 */
             }
         }
         
@@ -125,7 +127,7 @@
         @media (max-width: 768px) and (orientation: landscape) {
             .video-container {
                 max-height: 65vh; /* 横屏时允许更高一些 */
-                margin-top: 2vh; /* 横屏时减少顶部间距 */
+                margin-top: 5vh; /* 横屏时减少顶部间距 */
             }
         }
     </style>
@@ -185,27 +187,31 @@
                 background.style.backgroundImage = `url('${fallbackUrl}')`;
             };
             
-            // 手机端额外调整：确保视频完全可见
-            if (isMobile) {
-                const viewportHeight = window.innerHeight;
-                
-                // 计算视频容器的最大高度，确保不会超出可视区域
-                const maxVideoHeight = viewportHeight * 0.45; // 进一步降低到屏幕高度的45%
-                videoContainer.style.maxHeight = `${maxVideoHeight}px`;
-                
-                // 设置视频容器的顶部位置
-                const topMargin = viewportHeight * 0.05; // 使用5%的视口高度作为顶部间距
-                videoContainer.style.marginTop = `${topMargin}px`;
-                
-                // 监听窗口大小变化
-                window.addEventListener('resize', function() {
-                    const newViewportHeight = window.innerHeight;
+            // 手机端视频位置调整
+            function adjustVideoPosition() {
+                if (isMobile) {
+                    const viewportHeight = window.innerHeight;
                     const isLandscape = window.innerWidth > window.innerHeight;
                     
-                    if (isLandscape) {
-                        // 横屏时允许更高一些
-                        videoContainer.style.maxHeight = `${newViewportHeight * 0.65}px`;
-                        videoContainer.style.marginTop = `${newViewportHeight * 0.02}px`;
-                    } else {
-                        // 竖屏时保持较低
-                        videoContai
+                    // 竖屏模式：视频顶部距离屏幕顶部10%
+                    if (!isLandscape) {
+                        videoContainer.style.marginTop = `${viewportHeight * 0.1}px`;
+                        videoContainer.style.maxHeight = `${viewportHeight * 0.45}px`;
+                    } 
+                    // 横屏模式：视频顶部距离屏幕顶部5%
+                    else {
+                        videoContainer.style.marginTop = `${viewportHeight * 0.05}px`;
+                        videoContainer.style.maxHeight = `${viewportHeight * 0.65}px`;
+                    }
+                }
+            }
+            
+            // 初始调整
+            adjustVideoPosition();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', adjustVideoPosition);
+        });
+    </script>
+</body>
+</html>
