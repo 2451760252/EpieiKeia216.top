@@ -160,4 +160,12 @@
                 clearTimeout(timeoutId);
             };
             
-            // 如果图片加载
+            // 如果图片加载失败，立即使用备用图片
+            img.onerror = function() {
+                clearTimeout(timeoutId);
+                background.style.backgroundImage = `url('${fallbackUrl}')`;
+            };
+        });
+    </script>
+</body>
+</html>
