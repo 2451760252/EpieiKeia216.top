@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EpieiKeia216 - 安全视频播放</title>
-    <meta name="description" content="安全的B站视频播放页面">
+    <title>EpieiKeia216</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +19,6 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            background-color: #1a1a1a; /* 备用背景色 */
         }
         
         .background {
@@ -91,17 +89,6 @@
             color: #00a1d6;
         }
         
-        .security-notice {
-            text-align: center;
-            padding: 10px;
-            background-color: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            margin: 10px auto;
-            max-width: 600px;
-            border-radius: 4px;
-            display: none; /* 默认隐藏，仅在需要时显示 */
-        }
-        
         /* 手机端样式 */
         @media (max-width: 768px) {
             .content {
@@ -125,9 +112,6 @@
     
     <div class="content">
         <div class="video-container">
-            <div class="security-notice" id="securityNotice">
-                注意：此网站使用安全连接。如果看到安全警告，请检查GitHub Pages设置中的HTTPS选项。
-            </div>
             <div class="video-wrapper">
                 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1" 
                         scrolling="no" 
@@ -141,23 +125,9 @@
     </div>
     
     <div class="footer">
-        <a href="https://github.com/2451760252/EpieiKeia216.top" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/2451760252/EpieiKeia216.top" target="_blank">
             https://github.com/2451760252/EpieiKeia216.top
         </a>
     </div>
-
-    <script>
-        // 检测页面是否通过HTTPS加载
-        if (location.protocol !== 'https:') {
-            document.getElementById('securityNotice').style.display = 'block';
-            document.getElementById('securityNotice').textContent = '建议通过HTTPS访问此网站以获得最佳安全性。';
-        }
-        
-        // 备用背景图片加载失败处理
-        document.querySelector('.background').onerror = function() {
-            this.style.backgroundImage = 'none';
-            document.body.style.backgroundColor = '#1a1a1a';
-        };
-    </script>
 </body>
 </html>
