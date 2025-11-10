@@ -90,7 +90,8 @@
         @media (max-width: 768px) {
             body {
                 align-items: flex-start;
-                padding-top: 20px;
+                /* 调整顶部间距，使视频不会超出可视范围 */
+                padding-top: 5vh;
             }
             
             .background {
@@ -99,14 +100,14 @@
             
             .video-container {
                 max-width: 95%;
-                /* 将视频容器高度调整为原来的2/3 */
-                height: calc(100vh * 2 / 3);
-                margin-top: 10px;
+                /* 恢复原有高度设置 */
+                margin-top: 0;
             }
             
             .video-wrapper {
-                height: 100%;
-                padding-bottom: 0;
+                /* 恢复原有比例设置 */
+                padding-bottom: 56.25%;
+                height: 0;
             }
         }
     </style>
@@ -116,7 +117,7 @@
     
     <div class="video-container">
         <div class="video-wrapper">
-            <!-- 修改了弹幕参数，确保在手机上也能关闭弹幕 -->
+            <!-- 确保弹幕关闭 -->
             <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=0" 
                     scrolling="no" 
                     border="0" 
