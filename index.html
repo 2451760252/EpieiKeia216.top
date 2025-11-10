@@ -16,8 +16,7 @@
             color: white;
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             position: relative;
             overflow: hidden;
         }
@@ -38,6 +37,14 @@
         /* 默认背景（电脑端） */
         .background {
             background-image: url('https://free.picui.cn/free/2025/11/10/691134a2751c4.jpg');
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         
         .video-container {
@@ -65,9 +72,26 @@
             border: none;
         }
         
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: #00a1d6;
+        }
+        
         /* 手机端样式 */
         @media (max-width: 768px) {
-            body {
+            .content {
                 align-items: flex-start;
                 padding-top: 20px;
             }
@@ -86,16 +110,24 @@
 <body>
     <div class="background"></div>
     
-    <div class="video-container">
-        <div class="video-wrapper">
-            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1" 
-                    scrolling="no" 
-                    border="0" 
-                    frameborder="no" 
-                    framespacing="0" 
-                    allowfullscreen="true">
-            </iframe>
+    <div class="content">
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1" 
+                        scrolling="no" 
+                        border="0" 
+                        frameborder="no" 
+                        framespacing="0" 
+                        allowfullscreen="true">
+                </iframe>
+            </div>
         </div>
+    </div>
+    
+    <div class="footer">
+        <a href="https://github.com/2451760252/EpieiKeia216.top" target="_blank">
+            https://github.com/2451760252/EpieiKeia216.top
+        </a>
     </div>
 </body>
 </html>
