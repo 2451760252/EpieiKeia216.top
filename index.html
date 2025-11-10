@@ -90,7 +90,7 @@
         @media (max-width: 768px) {
             body {
                 align-items: flex-start;
-                padding-top: 10px; /* 减少顶部内边距 */
+                padding-top: 2px; /* 进一步减少顶部内边距 */
             }
             
             .background {
@@ -99,23 +99,35 @@
             
             .video-container {
                 max-width: 95%;
-                margin-top: 5px; /* 减少顶部外边距 */
-                max-height: 60vh; /* 限制视频容器最大高度 */
+                margin-top: 2px; /* 进一步减少顶部外边距 */
+                max-height: 55vh; /* 限制视频容器最大高度 */
             }
             
             .footer {
-                bottom: 10px; /* 调整页脚位置 */
+                bottom: 8px; /* 调整页脚位置 */
+                font-size: 12px; /* 减小页脚字体 */
             }
         }
         
         /* 特别小的手机屏幕 */
         @media (max-width: 480px) {
             body {
-                padding-top: 5px; /* 进一步减少顶部内边距 */
+                padding-top: 0; /* 完全移除顶部内边距 */
             }
             
             .video-container {
-                max-height: 55vh; /* 进一步限制视频容器高度 */
+                max-height: 50vh; /* 进一步限制视频容器高度 */
+            }
+            
+            .footer {
+                bottom: 5px; /* 进一步调整页脚位置 */
+            }
+        }
+        
+        /* 横屏手机 */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .video-container {
+                max-height: 70vh; /* 横屏时允许更高一些 */
             }
         }
     </style>
@@ -180,13 +192,21 @@
                 const viewportHeight = window.innerHeight;
                 
                 // 计算视频容器的最大高度，确保不会超出可视区域
-                const maxVideoHeight = viewportHeight * 0.6; // 视频占屏幕高度的60%
+                const maxVideoHeight = viewportHeight * 0.5; // 进一步降低到屏幕高度的50%
                 videoContainer.style.maxHeight = `${maxVideoHeight}px`;
                 
                 // 监听窗口大小变化
                 window.addEventListener('resize', function() {
                     const newViewportHeight = window.innerHeight;
-                    videoContainer.style.maxHeight = `${newViewportHeight * 0.6}px`;
+                    const isLandscape = window.innerWidth > window.innerHeight;
+                    
+                    if (isLandscape) {
+                        // 横屏时允许更高一些
+                        videoContainer.style.maxHeight = `${newViewportHeight * 0.7}px`;
+                    } else {
+                        // 竖屏时保持较低
+                        videoContainer.style.maxHeight = `${newViewportHeight * 0.5}px`;
+                    }
                 });
             }
         });
