@@ -99,7 +99,14 @@
             
             .video-container {
                 max-width: 95%;
+                /* 将视频容器高度调整为原来的2/3 */
+                height: calc(100vh * 2 / 3);
                 margin-top: 10px;
+            }
+            
+            .video-wrapper {
+                height: 100%;
+                padding-bottom: 0;
             }
         }
     </style>
@@ -109,7 +116,8 @@
     
     <div class="video-container">
         <div class="video-wrapper">
-            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=false" 
+            <!-- 修改了弹幕参数，确保在手机上也能关闭弹幕 -->
+            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114238815210394&bvid=BV16io9YTEqH&cid=29154347860&p=1&autoplay=true&danmaku=0" 
                     scrolling="no" 
                     border="0" 
                     frameborder="no" 
@@ -152,12 +160,4 @@
                 clearTimeout(timeoutId);
             };
             
-            // 如果图片加载失败，立即使用备用图片
-            img.onerror = function() {
-                clearTimeout(timeoutId);
-                background.style.backgroundImage = `url('${fallbackUrl}')`;
-            };
-        });
-    </script>
-</body>
-</html>
+            // 如果图片加载
